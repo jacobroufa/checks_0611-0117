@@ -8,11 +8,11 @@ On my initial browsing of RPS' [FOIA portal](http://www.boarddocs.com/il/rps205/
 
 ## Data
 
-I have accounted for missing fields in the `VendorID` column, where employee IDs have been redacted. The result is available formatted and unformatted in the `output` folder. The formatted result was obtained by simply running the `checks.json` through `python -m json.tool`.
+I have accounted for missing fields in the `VendorID` column, where employee IDs have been redacted. The results are available in the `output` folder. Data has been split into two sets -- `vendor` and `employee`.
 
 ## Organization
 
-*TODO* : I need to organize this dataset by year. I need to filter the data into two separate sets from that point, one for employees and one for vendors.
+**TODO** : I need to organize this dataset by year.
 
 ## License
 

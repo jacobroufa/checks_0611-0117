@@ -9,7 +9,8 @@ const parser = new PDF();
 const thisPath = process.cwd();
 const checksPdfPath = path.join(thisPath, 'checks.pdf');
 const outputDir = path.join(thisPath, 'output');
-const checksJsonPath = path.join(outputDir, 'checks.json');
+const employeesJsonPath = path.join(outputDir, 'employees.json');
+const vendorsJsonPath = path.join(outputDir, 'vendors.json');
 
 try {
     console.log('ensuring our data directory exists');
@@ -80,8 +81,14 @@ parser.on('pdfParser_dataReady', data => {
         checks = checks.concat(getChecks(page.Texts, 5));
     });
 
+    console.log('filtering employees');
+    let employees = checks.filter(check => !check.VendorID);
+    console.log('filtering vendors');
+    let vendors = checks.filter(check => check.VendorID);
+
     console.log('writing our parsed JSON');
-    fs.writeFile(checksJsonPath, JSON.stringify(checks));
+    fs.writeFile(employeesJsonPath, JSON.stringify(employees, null, 4));
+    fs.writeFile(vendorsJsonPath, JSON.stringify(vendors, null, 4));
 });
 
 parser.loadPDF(checksPdfPath)
