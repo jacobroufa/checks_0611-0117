@@ -20,11 +20,11 @@ try {
     fs.mkdirSync(outputDir);
 }
 
-function cleanText(text) {
+function cleanText (text) {
     return decodeURIComponent(text.replace(/\+/g, ' ')).trim();
 }
 
-function getChecks(page, cols) {
+function getChecks (page, cols) {
     let initialRow = true;
     let place = 0;
     let labels = [];
@@ -67,6 +67,37 @@ function getChecks(page, cols) {
     return rows;
 }
 
+function byYears (initial, next) {
+    let date = next.CheckDate.split('/');
+    let months = {
+        1: 'January',
+        2: 'February',
+        3: 'March',
+        4: 'April',
+        5: 'May',
+        6: 'June',
+        7: 'July',
+        8: 'August',
+        9: 'September',
+        10: 'October',
+        11: 'November',
+        12: 'December'
+    };
+    let month = months[date[0]];
+    let year = date[2];
+
+    if (!initial[year]) {
+        initial[year] = {};
+    }
+    if (!initial[year][month]) {
+        initial[year][month] = [];
+    }
+
+    initial[year][month].push(next);
+
+    return initial;
+}
+
 parser.on('pdfParser_dataError', error => console.error(error.parserError));
 
 parser.on('pdfParser_dataReady', data => {
@@ -82,9 +113,11 @@ parser.on('pdfParser_dataReady', data => {
     });
 
     console.log('filtering employees');
-    let employees = checks.filter(check => !check.VendorID);
+    let employees = checks.filter(check => !check.VendorID)
+        .reduce(byYears, {});
     console.log('filtering vendors');
-    let vendors = checks.filter(check => check.VendorID);
+    let vendors = checks.filter(check => check.VendorID)
+        .reduce(byYears, {});
 
     console.log('writing our parsed JSON');
     fs.writeFile(employeesJsonPath, JSON.stringify(employees, null, 4));
