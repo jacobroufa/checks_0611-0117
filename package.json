@@ -1,0 +1,14 @@
+{
+  "name": "checks_0611-0117",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob M. Roufa <jacob.roufa@gmail.com> (http://jacobroufa.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "pdf2json": "1.1.7"
+  }
+}
