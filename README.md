@@ -8,11 +8,19 @@ On my initial browsing of RPS' [FOIA portal](http://www.boarddocs.com/il/rps205/
 
 ## Data
 
-I have accounted for missing fields in the `VendorID` column, where employee IDs have been redacted. The results are available in the `output` folder. Data has been split into two sets -- `vendor` and `employee`.
+I have accounted for missing fields in the `VendorID` column, where employee IDs have been redacted. The results are available in the `output` folder. Data has been split into two sets -- `vendor` and `employee` and organized by year and month.
 
-## Organization
+## Todo
 
-**TODO** : I need to organize this dataset by year.
+* group by vendor/employee, per month
+* add statistics to monthly and yearly organizational objects
+  * highest paid (total of all checks)
+  * lowest paid (total of all checks)
+  * most paid (# of checks)
+  * monthly/yearly total spending (for overview analysis)
+* ranking formula
+  * two factor initially, median check size and number of checks
+  * possibly further refined with relevancy (recency)
 
 ## License
 
